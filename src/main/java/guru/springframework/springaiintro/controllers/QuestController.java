@@ -1,9 +1,11 @@
 package guru.springframework.springaiintro.controllers;
 
 import guru.springframework.springaiintro.models.Answer;
+import guru.springframework.springaiintro.models.GetCapitalRequest;
 import guru.springframework.springaiintro.models.Question;
 import guru.springframework.springaiintro.services.OpenAIService;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
@@ -14,8 +16,13 @@ public class QuestController {
         this.openAIService = openAIService;
     }
 
-    @PostMapping
-    public Answer askQuestion(Question question) {
+    @PostMapping("/ask")
+    public Answer askQuestion(@RequestBody Question question) {
         return  this.openAIService.getAnswer(question);
+    }
+
+    @PostMapping("/capital")
+    public  Answer getCapital(@RequestBody GetCapitalRequest question) {
+        return this.openAIService.getCapital(question);
     }
 }
